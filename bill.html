@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HI</title> 
+        <meta charset="utf-8">
+    </head>
+    <style>
+        #game{
+            border-color: black;
+        }
+        body {  color:azure;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            background-image:url(vincent.jpeg );
+            background-size:cover;
+            background-repeat: no-repeat;      
+        }
+    </style>
+    <body>
+    
+        <canvas class="game" id="game" width="1430" height=774"></canvas>
+        
+    </body>  
+    <script>
+
+        var z = 0;
+        var h;
+        var bigx;
+        var bigy;
+        move_p_x=[];
+        move_p_y=[];
+        colors = ["red", "orange", "yellow", "green", "blue", "purple", "HotPink", "gold", "FloralWhite", "navy"];
+        var c = 0;
+
+
+        const canvas=document.getElementById('game');
+        const ctx = canvas.getContext("2d");
+        var i = 0;
+
+        function shiw()
+        {
+            c = Math.floor(Math.random() * 10);
+            for(var i = 0; i <= 1000; i++)
+            {
+                move_p_x.push(714 - (Math.ceil((714 - event.pageX) * i / 1000)));
+                move_p_y.push(744 - (Math.ceil((744 - event.pageY) * i / 1000)));
+                bigx = event.pageX;
+                bigy = event.pageY;
+            }
+            countdown()
+        }
+    
+        function startmap()
+        {
+            x = move_p_x[z];
+            y = move_p_y[z];
+            ctx.clearRect(x-27, y-27, 30, 30);
+            ctx.beginPath();
+            ctx.arc(x-11, y-10, 10, 0, 2*Math.PI);
+            ctx.fillStyle = colors[c];
+            ctx.fill();
+            ctx.lineWidth = 1;
+            ctx.closePath();
+            z += 1;
+        }
+                
+        function countdown()
+        {
+            var t = 0; 
+            for(var i = 0; i <= 1000; i++)
+            {
+                setTimeout(startmap, t)
+                t += 0.025;
+            }
+            setTimeout(bigcircle, t)
+        }
+
+        function bigcircle()
+        {       
+            x = bigx;
+            y = bigy;
+            ctx.beginPath();
+            ctx.arc(x-9, y-9, 50, 0, 2*Math.PI);
+            ctx.fillStyle = colors[c];
+            ctx.fill();
+            ctx.lineWidth = 1;
+            ctx.closePath();
+        }
+
+        window.addEventListener('click', shiw)
+    </script>
+</html>
